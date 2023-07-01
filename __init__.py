@@ -21,7 +21,7 @@ menu_config.enter_keys = ["PADENTER"]
 menu_config.key_up_keys = ["KEY_UP"]
 menu_config.key_down_keys = ["KEY_DOWN"]
 menu_config.menudict = {}
-
+menu_config.is_active = True
 
 # https://www.lfd.uci.edu/~gohlke/pythonlibs/#curses
 
@@ -64,94 +64,98 @@ def start_menu(
             None
 
         Example:
-    import subprocess
-    from cursesdict import start_menu
+import subprocess
 
-    def fufu1(key):
-        filetest = "c:\\testestestest.txt"
-        with open(filetest, mode="w", encoding="utf-8") as f:
-            f.write(str(key))
-            f.write("\n")
-        subprocess.Popen(f"notepad.exe {filetest}", shell=True)
+from cursesdict import start_menu, menu_config
 
 
-    stama = {
-        "main": {
-            "menu_header": "Imaginary School - Main Menu",
-            "option_0": {
-                "Exercises": lambda: fufu1("Imaginary School - Main Menu - Exercises")
-            },
-            "option_1": {"Review": lambda: fufu1("Imaginary School - Main Menu - Review")},
-            "option_2": {
-                "Talk to a teacher": lambda: fufu1(
-                    "Imaginary School - Main Menu - Talk to a teacher"
-                )
-            },
-            "option_3": {
-                "Blackboard": lambda: fufu1("Imaginary School - Main Menu - Blackboard")
-            },
-            "option_4": {
-                "Vocabulary Training": {
-                    "menu_header": "Welcome to the Vocabulary Training section:",
-                    "option_0": {
-                        "A1": lambda: fufu1(
-                            "Imaginary School - Main Menu - Vocabulary Training - A1"
-                        )
-                    },
-                    "option_1": {
-                        "A2": lambda: fufu1(
-                            "Imaginary School - Main Menu - Vocabulary Training - A2"
-                        )
-                    },
-                    "option_2": {
-                        "B1-B2": lambda: fufu1(
-                            "Imaginary School - Main Menu - Vocabulary Training - B1-B2"
-                        )
-                    },
-                    "option_3": {
-                        "C1-C2": lambda: fufu1(
-                            "Imaginary School - Main Menu - Vocabulary Training - C1-C2"
-                        )
-                    },
-                    "option_4": {
-                        "Training for Tests": {
-                            "menu_header": "Specific Test Training",
-                            "option_0": {
-                                "Sub Option 0": lambda: fufu1(
-                                    "Imaginary School - Main Menu - Vocabulary Training - Suboption 0"
-                                )
-                            },
-                            "option_1": {
-                                "Sub Option 1": lambda: fufu1(
-                                    "Imaginary School - Main Menu - Vocabulary Training - Suboption 1"
-                                )
-                            },
-                            "option_2": {
-                                "Sub Option 2": lambda: fufu1(
-                                    "Imaginary School - Main Menu - Vocabulary Training - SubOption 2"
-                                )
-                            },
-                            "option_3": {
-                                "Sub Option 3": lambda: fufu1(
-                                    "Imaginary School - Main Menu - Vocabulary Training - Suboption 3"
-                                )
-                            },
-                            "option_4": {
-                                "Sub Option 4": lambda: fufu1(
-                                    "Imaginary School - Main Menu - Vocabulary Training - Suboption 4"
-                                )
-                            },
-                            "option_5": {
-                                "Go back": ("main", "option_4", "Vocabulary Training")
-                            },
+def fufu1(key):
+    filetest = "c:\\testestestest.txt"
+    with open(filetest, mode="w", encoding="utf-8") as f:
+        f.write(str(key))
+        f.write("\n")
+    subprocess.Popen(f"notepad.exe {filetest}", shell=True)
+    menu_config.is_active = False  # exits the menu
+
+
+stama = {
+    "main": {
+        "menu_header": "Imaginary School - Main Menu",
+        "option_0": {
+            "Exercises": lambda: fufu1("Imaginary School - Main Menu - Exercises")
+        },
+        "option_1": {"Review": lambda: fufu1("Imaginary School - Main Menu - Review")},
+        "option_2": {
+            "Talk to a teacher": lambda: fufu1(
+                "Imaginary School - Main Menu - Talk to a teacher"
+            )
+        },
+        "option_3": {
+            "Blackboard": lambda: fufu1("Imaginary School - Main Menu - Blackboard")
+        },
+        "option_4": {
+            "Vocabulary Training": {
+                "menu_header": "Welcome to the Vocabulary Training section:",
+                "option_0": {
+                    "A1": lambda: fufu1(
+                        "Imaginary School - Main Menu - Vocabulary Training - A1"
+                    )
+                },
+                "option_1": {
+                    "A2": lambda: fufu1(
+                        "Imaginary School - Main Menu - Vocabulary Training - A2"
+                    )
+                },
+                "option_2": {
+                    "B1-B2": lambda: fufu1(
+                        "Imaginary School - Main Menu - Vocabulary Training - B1-B2"
+                    )
+                },
+                "option_3": {
+                    "C1-C2": lambda: fufu1(
+                        "Imaginary School - Main Menu - Vocabulary Training - C1-C2"
+                    )
+                },
+                "option_4": {
+                    "Training for Tests": {
+                        "menu_header": "Specific Test Training",
+                        "option_0": {
+                            "Sub Option 0": lambda: fufu1(
+                                "Imaginary School - Main Menu - Vocabulary Training - Suboption 0"
+                            )
+                        },
+                        "option_1": {
+                            "Sub Option 1": lambda: fufu1(
+                                "Imaginary School - Main Menu - Vocabulary Training - Suboption 1"
+                            )
+                        },
+                        "option_2": {
+                            "Sub Option 2": lambda: fufu1(
+                                "Imaginary School - Main Menu - Vocabulary Training - SubOption 2"
+                            )
+                        },
+                        "option_3": {
+                            "Sub Option 3": lambda: fufu1(
+                                "Imaginary School - Main Menu - Vocabulary Training - Suboption 3"
+                            )
+                        },
+                        "option_4": {
+                            "Sub Option 4": lambda: fufu1(
+                                "Imaginary School - Main Menu - Vocabulary Training - Suboption 4"
+                            )
+                        },
+                        "option_5": {
+                            "Go back": ("main", "option_4", "Vocabulary Training")
                         },
                     },
-                    "option_5": {"Go back": ("main",)},
                 },
+                "option_5": {"Go back": ("main",)},
             },
-        }
+        },
     }
-    start_menu(stama)
+}
+start_menu(stama)
+
 
     """
     menu_config.menulen = menu_len
@@ -267,7 +271,7 @@ def main(stdscr):
         header=active_choices["menu_header"], all_menu_choices=active_menu_choices
     )
 
-    while True:
+    while menu_config.is_active:
         print_menu(
             header=active_choices["menu_header"], all_menu_choices=active_menu_choices
         )
@@ -294,4 +298,5 @@ def main(stdscr):
             current_choice = (current_choice + 1) % len(active_menu_choices)
         elif key == menu_config.key_up_keys:
             current_choice = (current_choice - 1) % len(active_menu_choices)
+    break_window()
     curses.endwin()
