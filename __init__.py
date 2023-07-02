@@ -296,7 +296,7 @@ def main(stdscr):
                 current_choice = 0
         if key in menu_config.key_down_keys:
             current_choice = (current_choice + 1) % len(active_menu_choices)
-        elif key == menu_config.key_up_keys:
+        elif key in menu_config.key_up_keys:
             current_choice = (current_choice - 1) % len(active_menu_choices)
     break_window()
     curses.endwin()
